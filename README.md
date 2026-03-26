@@ -1,10 +1,9 @@
 
-# Mean-And-Variance-
+#  Mean and variance of a discrete  distribution
+# NAme: Abhishek kannan M
+# Reg no: 212224040007
+# Date: 29/1/26
 
-## Name :Abhishek Kannan M
-
-## REGISTER NUMBER : 212224040007
-## Date: 16/3/26
 
 # Aim : 
 
@@ -48,39 +47,56 @@ It shows the distance of a random variable from its mean. It is calcualted as
       ![image](https://user-images.githubusercontent.com/103921593/192942852-913550a9-fabe-4a55-b956-0487b18bbd97.png)
 
 
-# Experiment :
 
-![image](https://user-images.githubusercontent.com/103921593/229993174-5b67e57e-3e01-4ac4-9f83-410a932b22bf.png)
 
 # Program :
 ```
 import numpy as np
-L=[int(i) for i in input().split()]
-N=len(L); M=max(L) 
-x=list();f=list()
-for i in range (M+1):
+L = [int(i) for i in input("Enter arrival data: ").split()]
+N = len(L)
+M = max(L)
+X = []
+f = []
+for i in range(M + 1):
     c = 0
     for j in range(N):
-        if L[j]==i:
-            c=c+1
+        if L[j] == i:
+            c += 1
     f.append(c)
-    x.append(i)
-sf=np.sum(f)
-p=list()
-for i in range(M+1):
-    p.append(f[i]/sf) 
-mean=np.inner(x,p)
-EX2=np.inner(np.square(x),p)
-var=EX2-mean**2 
-SD=np.sqrt(var)
-print("The Mean arrival rate is %.3f "%mean)
-print("The Variance of arrival from feeder is %.3f "%var) 
-print("The Standard deviation of arrival from feeder is %.3F "%SD)
+    X.append(i)
+sf = np.sum(f)
+p = [f[i] / sf for i in range(M + 1)]
+# Mean of arrival (expected value)
+mean = np.inner(X, p)
+EX2 = np.inner(np.square(X), p)
+var = EX2 - mean**2
+SD = np.sqrt(var)
+print("\nX\tp(x)")
+for i in range(M + 1):
+    if f[i] > 0:   # Only print arrivals that actually occurred
+        print(f"{X[i]}\t{p[i]:.3f}")
+print(f"\nThe Mean arrival rate is {mean:.3f}")
+print(f"The Variance of arrival from feeder is {var:.3f}")
+print(f"The Standard deviation of arrival from feeder is {SD:.3f}")
 ```
 
-# Output : 
-<img width="814" height="146" alt="image" src="https://github.com/user-attachments/assets/1cb9a7b1-0e95-4e04-9ef2-28ff35b14204" />
+# Output :
+```
+Enter arrival data: 5 0 1 5 2 3 7 5 3 5 5 7 7 2 3 3 5 3 6 1
 
+X	p(x)
+0	0.050
+1	0.100
+2	0.100
+3	0.250
+5	0.300
+6	0.050
+7	0.150
+
+The Mean arrival rate is 3.900
+The Variance of arrival from feeder is 4.190
+The Standard deviation of arrival from feeder is 2.047
+```
 
 # Results :
 The mean and variance of arrivals of objects from feeder using probability distribution are calculated.
